@@ -61,6 +61,18 @@ nginx-cpm:
     - php-cpm
 
 
+nginx-download:
+  restart: always
+  image: nginx
+  ports:
+    - 8582:80
+  mem_limit: 512MB
+  volumes:
+    - ./data/nginx-download/ssl/:/etc/nginx/ssl/:rw
+    - ./data/nginx-download/conf.d/:/etc/nginx/conf.d/:rw
+    - ./data/nginx-download/log/:/var/log/nginx/:rw
+    - ./data/nginx-download/www/:/var/www/
+
 nginx-proxy:
   restart: always
   image: nginx
@@ -77,5 +89,4 @@ nginx-proxy:
   links:
     - nginx-cpm
     - nginx-ontowiki
-
-
+    - nginx-download
